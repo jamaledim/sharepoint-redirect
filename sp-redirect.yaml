@@ -1,0 +1,24 @@
+id: sharepoint-redirect
+
+info:
+    name: SharePoint Redirect
+    author: Jamaledim
+    severity: low
+    description: Sharepoint Open Redircet
+    tags: Open-Redirect
+    metadata:
+        max-request: 5
+    
+http:
+    - method: GET
+      path:
+        - '{{RootURL}}/_layouts/15/redirectpage.aspx?source={{RootURL}}%00@google.com&target={{RootURL}}%00@google.com'
+      matchers-condition: and
+      matchers:
+        - type: status
+          status:
+            - 302
+        - type: word
+          words:
+            - "google.com"
+          part: body
